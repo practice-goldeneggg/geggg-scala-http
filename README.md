@@ -1,7 +1,7 @@
 # geggg-scala-http
 This is simple HTTP access client library __without third pirty's library depencencies__ .
 
-This library supports GET, POST, and PUT method now.
+This library supports GET, POST, and PUT method.
 
 ## Simple GET/POST access
 
@@ -11,11 +11,10 @@ val resGet = client.get(YOUR_URL)
 val resPost = client.post(YOUR_URL)
 
 resGet.status // is HTTP status code
-resGet.contents // is response contents(like HTML, etc)
+resGet.contents // is response contents(like HTML, JSON, etc)
 ```
 
 ## Access with query parameter
-If you want to use query parameter, you can access `QueryMap` class and mothods.
 
 ```scala
 val client = HttpClient()
@@ -28,7 +27,7 @@ val resGet = client.get(YOUR_URL, query, "Shift_JIS") // 3rd parameter is encodi
 ```
 
 ### More information of QueryMap class
-`QueryMap` supports 2 convenient methods.
+`QueryMap` is implicit conversion's class from `Map`, and supports 2 convenient methods.
 
 ```scala
 val query = Map("key1" -> "value1", "key2" -> "あいうえお")
