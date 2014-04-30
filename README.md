@@ -23,6 +23,8 @@ val query = Map("key1" -> "value1") // Key-Value combinations of query using Map
 
 val resGet = client.get(YOUR_URL, query)
 val resPost = client.post(YOUR_URL, query)
+
+val resGet = client.get(YOUR_URL, query, "Shift_JIS") // 3rd parameter is encoding of request parameter (default is UTF-8)
 ```
 
 ### More information of QueryMap class
@@ -30,9 +32,11 @@ val resPost = client.post(YOUR_URL, query)
 
 ```scala
 val query = Map("key1" -> "value1", "key2" -> "あいうえお")
+
 query.queryString("key1") // return string "key1=value1"
 query.queryString("key2") // return string with encoding "key2=%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A&"
-query.queries() // return parameter string joining & character "key1=value1&key2=%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A"
+
+query.queries() // return parameter string joining '&' character "key1=value1&key2=%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A"
 ```
 
 ## Basic authentication
@@ -40,11 +44,11 @@ You can use `BasicAuthUser` class.
 
 ```scala
 val client = HttpClient()
-val query = QueryMap("keyX" -> "valueX")
+val query = Map("keyX" -> "valueX", "keyY" -> "スカラ")
 val auth = BasicAuthUser(YOUR_USERNAME, YOUR_PASSWORD)
 
-val resGet = client.get(YOUR_URL, query, auth)
-val resPost = client.post(YOUR_URL, query, auth)
+val resGet = client.get(YOUR_URL, query, "UTF-8", auth)
+val resPost = client.post(YOUR_URL, query, "UTF-8", auth)
 ```
 
 ## Customize request configuration
